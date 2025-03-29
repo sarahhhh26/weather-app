@@ -1,0 +1,288 @@
+:root {
+    --day-gradient: linear-gradient(160deg, #89f7fe 0%, #66a6ff 100%);
+    --night-gradient: linear-gradient(160deg, #1e3c72 0%, #2a5298 100%);
+    --sunset-gradient: linear-gradient(160deg, #ff8c89 0%, #ffd7d7 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    background: var(--day-gradient);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    min-height: 100vh;
+    padding: clamp(1rem, 5vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transition: background 0.3s ease;
+    padding-bottom: clamp(3rem, 10vw, 4rem);
+}
+
+.weatherForm {
+    width: 100%;
+    max-width: min(90%, 400px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1rem auto;
+}
+
+.cityInput {
+    width: 100%;
+    padding: clamp(0.8rem, 3vw, 1rem);
+    font-size: clamp(1rem, 3vw, 1.1rem);
+    border: none;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    outline: none;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.cityInput:focus {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: clamp(0.8rem, 3vw, 1rem);
+    font-size: clamp(1rem, 3vw, 1.1rem);
+    border: none;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.25);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+button[type="submit"]:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+}
+
+button[type="submit"]:active {
+    transform: translateY(1px);
+}
+
+.card {
+    width: 100%;
+    max-width: min(90%, 400px);
+    margin: clamp(1rem, 5vw, 2rem) auto;
+    padding: clamp(1.5rem, 5vw, 2rem);
+    border-radius: clamp(1rem, 3vw, 1.25rem);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.cityDisplay {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tempDisplay {
+    font-size: clamp(2rem, 7vw, 3rem);
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.humidityDisplay,
+.descDisplay {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.weatherEmoji {
+    font-size: clamp(3rem, 10vw, 4rem);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.errorDisplay {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: #ff6b6b;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Weather condition-specific styles */
+.card[data-weather="clear"] {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.card[data-weather="rain"] {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.card[data-weather="clouds"] {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.card[data-weather="snow"] {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Time-based gradients */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: var(--night-gradient);
+    }
+}
+
+/* Add responsive design */
+@media screen and (max-width: 380px) {
+    html {
+        font-size: 14px;
+    }
+
+    .card {
+        padding: 1rem;
+        gap: 0.5rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .weatherForm {
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .cityInput {
+        flex: 2;
+    }
+
+    button[type="submit"] {
+        flex: 1;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .card {
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+}
+
+/* Landscape mode optimization */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    body {
+        padding: 0.5rem;
+    }
+
+    .weatherForm {
+        margin: 0.5rem auto;
+    }
+
+    .card {
+        margin: 0.5rem auto;
+        padding: 1rem;
+    }
+
+    .cityDisplay,
+    .tempDisplay,
+    .humidityDisplay,
+    .descDisplay {
+        margin: 0.25rem 0;
+    }
+}
+
+/* Add animation for weather transitions */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer {
+    width: 100%;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer p {
+    color: white;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    font-weight: 500;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.heart {
+    display: inline-block;
+    animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1);
+    }
+    75% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Adjust for very small screens */
+@media screen and (max-height: 500px) {
+    .footer {
+        position: static;
+        margin-top: 1rem;
+    }
+    
+    body {
+        padding-bottom: clamp(1rem, 5vw, 2rem);
+    }
+}
