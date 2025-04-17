@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather-App</title>
-    <link rel="stylesheet" href="index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <form action="" class="weatherForm">
-
-        <input type="text" class="cityInput" placeholder="Enter City Name">
-    
-    <button type="submit"> Get Weather Info</button>
-</form>
-<div class="card" style="display: none">
- 
-
-
-</div>
-    <script src="index.js"></script>
-    
+  <div class="authContainer">
+    <h1 class="authTitle">Login</h1>
+    <form class="authForm" id="loginForm">
+      <input type="email" class="authInput" placeholder="Enter your email" required />
+      <input type="password" class="authInput" placeholder="Enter your password" required />
+      <button type="submit" class="authButton">Login</button>
+    </form>
+    <p class="authSwitch">
+      Don't have an account? <a href="weather.html">Sign up</a>
+    </p>
+  </div>
 </body>
 <footer class="footer">
-    <p>Created with <span class="heart">❤️</span>by Sarah and Hardik</p>
+  <p>Created with <span class="heart">❤️</span> by Akshat</p>
 </footer>
+<script src="login.js"></script>
 </html>
